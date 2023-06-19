@@ -11,7 +11,7 @@
 	<div class="container">
 		<h1>인덱스 페이지 입니다.</h1>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/member/insertform">파라미터 추출테스트</a></li>
+			<li><a href="member/insertform">파라미터 추출테스트</a></li>
 			<li><a href="${pageContext.request.contextPath}/fortune">오늘의 운세보기1</a></li>
 			<li><a href="${pageContext.request.contextPath}/fortune2">오늘의 운세보기2</a></li>
 			<li><a href="${pageContext.request.contextPath}/fortune3">오늘의 운세보기3</a></li>

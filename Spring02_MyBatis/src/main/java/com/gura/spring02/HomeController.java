@@ -1,4 +1,4 @@
-package com.gura.step01;
+package com.gura.spring02;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public class HomeController {
 		//home.jsp 페이지에서 필요한 모델(data)를 HttpServeltRequest 객체에 담아두기
 		List<String> list = new ArrayList<String>();
 		list.add("날씨가 많이 더워지고 있어요");
-		list.add("어쩌고,,,");
-		list.add("저쩌고...");
+		list.add("집에 가서 공부해야겠지...?");
+		list.add("올해안에 취업하려면 열심히 해야지...?");
 		
 		//home.jsp 페이지에서 필요한 모델(data)를 HttpServletRequest 객체에 담아두기
 		request.setAttribute("list", list);
