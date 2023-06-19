@@ -72,17 +72,17 @@ public class TestController {
 	public List<Map<String, Object>> json6() {
 		List<Map<String, Object>> list = new ArrayList<>();
 		Map<String, Object> map1 = new HashMap<>();
-		map1.put("num","1");
+		map1.put("num",1);
 		map1.put("name","김구라");
 		map1.put("addr","노량진");;
 		list.add(map1);
 		Map<String, Object> map2 = new HashMap<>();
-		map2.put("num","2");
+		map2.put("num",2);
 		map2.put("name","해골");
 		map2.put("addr","상도동");;
 		list.add(map2);
 		Map<String, Object> map3 = new HashMap<>();
-		map3.put("num","3");
+		map3.put("num",3);
 		map3.put("name","원숭이");
 		map3.put("addr","동물원");;
 		list.add(map3);
