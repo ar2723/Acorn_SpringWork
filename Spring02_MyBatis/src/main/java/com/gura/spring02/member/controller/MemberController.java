@@ -32,6 +32,31 @@ public class MemberController {
 		return "member/insertform";
 	}
 	
+	@RequestMapping("/member/update")
+	public String update(MemberDto dto) {
+		//MemberDao 객체를 이용해서 DB에 저장
+		dao.update(dto);
+		//view page로 forward 이동해서 응답
+		return "member/update";
+	}
+	
+	//회원 삭제 요청 처리
+	@RequestMapping("/member/delete")
+	public String update(int num, HttpServletRequest request) {
+		dao.delete(num);
+		List<MemberDto> list = dao.getList();
+		request.setAttribute("list", list);
+		return "member/list";
+	}
+	
+	//회원추가 폼 요청 처리
+	@RequestMapping("/member/updateform")
+	public String updateform(int num, HttpServletRequest request) {
+		MemberDto dto = dao.getData(num);
+		request.setAttribute("dto", dto);
+		return "member/updateform";
+	}
+	
 	//회원 목록 보기 요청 처리
 	@RequestMapping("/member/list")
 	public String list(HttpServletRequest request) {
