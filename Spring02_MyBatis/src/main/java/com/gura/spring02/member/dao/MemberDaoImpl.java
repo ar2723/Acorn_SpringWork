@@ -13,7 +13,7 @@ import com.gura.spring02.member.dto.MemberDto;
 public class MemberDaoImpl implements MemberDao{
 	//MyBatis를 사용하기 위한 핵심 의존 객체 주입 받기
 	@Autowired
-	private SqlSession session; 
+	private SqlSession session;
 
 	@Override
 	public void insert(MemberDto dto) {

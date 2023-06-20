@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/member/list.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<a href="${pageContext.request.contextPath}/member/insertform">회원추가</a>
 		<h1>회원 목록입니다.</h1>
-		<table>
+		<a href="${pageContext.request.contextPath}/member/insertform">회원추가</a>
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>번호</th>

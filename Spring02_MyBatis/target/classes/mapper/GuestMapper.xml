@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="guest">
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_guest
+		WHERE num = ${num}
+	</delete>
+	
+	<select id="getData" parameterType="int" resultType="com.gura.spring02.guest.dto.GuestDto">
+		SELECT num, writer, content
+		FROM board_guest
+		WHERE num = #{num}
+	</select>
+	
+	<select id="getList" resultType="com.gura.spring02.guest.dto.GuestDto">
+		SELECT num, writer, content, regdate
+		FROM board_guest
+	</select>
+	
+	<update id="update" parameterType="com.gura.spring02.guest.dto.GuestDto">
+		UPDATE board_guest
+		SET writer = #{writer}, content = #{content}
+		WHERE num = #{num} AND pwd = #{pwd}
+	</update>
+	
+	<insert id="insert" parameterType="com.gura.spring02.guest.dto.GuestDto">
+		INSERT INTO board_guest
+		(num, writer, content, pwd, regdate)
+		VALUES(member_seq.NEXTVAL, #{writer}, #{content}, #{pwd}, SYSDATE) 
+	</insert>
+</mapper>
