@@ -16,7 +16,7 @@
 			<div class="mb-1">
 				<label for="num" class="form-label">삭제할 글 번호</label> <input
 					type="text" name="num" class="form-control-plaintext" id="num"
-					value="" readonly />
+					value="${param.num}" readonly />
 			</div>
 			<div class="mb-1">
 				<label for="pwd" class="form-label">비밀번호 입력</label> <input

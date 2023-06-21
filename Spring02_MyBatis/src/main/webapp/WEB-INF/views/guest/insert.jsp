@@ -9,7 +9,8 @@
 </head>
 <body>
 	<script>
-			alert("글을 성공적으로 등록 했습니다.");
+			//insertform을 통해 전달된 파라미터는 컨트롤러를 거쳤다하더라도 응답전까지는 사용이 가능하다.
+			alert("${param.writer}님이 작성한 글을 성공적으로 등록 했습니다.");
 			location.href ="${pageContext.request.contextPath}/guest/list";
 	</script>
 </body>

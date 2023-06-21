@@ -47,7 +47,8 @@
    <!-- 
       SqlSession 인터페이스를 구현한 
       SqlSessionTemplate(SqlSession) 객체 
-      Dao 가 의존하는 객체 
+      Dao 가 의존하는 객체
+      bean 설정에 의해서 만들어진 객체이며, 이 객체가 결국 dao 페이지의 session에 담기는 것이다.
    -->
    <beans:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
    		<beans:constructor-arg name="sqlSessionFactory" ref="sessionFactory"/>

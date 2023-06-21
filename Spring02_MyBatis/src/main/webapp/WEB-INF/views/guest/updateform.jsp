@@ -32,7 +32,7 @@
 			</div>
 			<button class="btn btn-dark" type="submit">수정확인</button>
 			<button class="btn btn-warning" type="reset">취소</button>
-			<a href="list.jsp" class="btn btn-primary">돌아가기</a>
+			<a href="list" class="btn btn-primary">돌아가기</a>
 		</form>
 	</div>
 </body>

@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<script>
+		alert("게시글이 수정되었습니다.");
+		location.href = "${pageContext.request.contextPath}/guest/list"
+	</script>
 </body>
 </html>

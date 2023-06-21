@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	
+
 	//이 프로젝트의 (root)최상위 경로 요청이 오면
 	@RequestMapping(value = "/")
 	//전달할 타입의 매개변수가 있다면 ()안에 선언해놓으면 클래스 선언없이 자동으로 전달이된다.
