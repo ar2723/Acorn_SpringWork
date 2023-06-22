@@ -66,7 +66,7 @@ public class GuestController {
 	
 	@RequestMapping("/guest/list")
 	public ModelAndView list(ModelAndView mView) {
-		//서비스를 이용해서 ModelAndView 객체에 글목록의 정보를 담아온다
+		//서비스의 메소드를 호출해서 ModelAndView 객체의 참조값을 전달하면 방명록 목록이 담긴다.
 		service.getGuestList(mView);
 		//view page 정보도 담고
 		mView.setViewName("guest/list");

@@ -5,30 +5,30 @@
 
 <mapper namespace="guest">
 	
-	<delete id="delete" parameterType="com.gura.spring02.guest.dto.GuestDto">
+	<delete id="delete" parameterType="guestDto">
 		DELETE FROM board_guest
 		WHERE num = #{num} AND pwd = #{pwd}
 	</delete>
 	
-	<select id="getData" parameterType="int" resultType="com.gura.spring02.guest.dto.GuestDto">
+	<select id="getData" parameterType="int" resultType="guestDto">
 		SELECT num, writer, content, pwd, regdate
 		FROM board_guest
 		WHERE num = #{num}
 	</select>
 	
-	<select id="getList" resultType="com.gura.spring02.guest.dto.GuestDto">
+	<select id="getList" resultType="guestDto">
 		SELECT num, writer, content, pwd, TO_CHAR(regdate, 'YYYY.MM.DD') AS regdate
 		FROM board_guest
 		ORDER BY num DESC
 	</select>
 	
-	<update id="update" parameterType="com.gura.spring02.guest.dto.GuestDto">
+	<update id="update" parameterType="guestDto">
 		UPDATE board_guest
 		SET writer = #{writer}, content = #{content}
 		WHERE num = #{num} AND pwd = #{pwd}
 	</update>
 	
-	<insert id="insert" parameterType="com.gura.spring02.guest.dto.GuestDto">
+	<insert id="insert" parameterType="guestDto">
 		INSERT INTO board_guest
 		(num, writer, content, pwd, regdate)
 		VALUES(board_guest_seq.NEXTVAL, #{writer}, #{content}, #{pwd}, SYSDATE) 

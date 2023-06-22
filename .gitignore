@@ -1,12 +1,6 @@
-.classpath
-.project
 
-#Servers 폴더도 제외하기
-/Servers/
-
-
-# Created by https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,eclipse
+# Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,windows,web,maven
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,windows,web,maven
 
 ### Eclipse ###
 .metadata
@@ -100,6 +94,40 @@ local.properties
 hs_err_pid*
 replay_pid*
 
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+### Web ###
+*.asp
+*.cer
+*.csr
+*.css
+*.htm
+*.html
+*.js
+*.jsp
+*.php
+*.rss
+*.wasm
+*.wat
+*.xhtml
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -126,4 +154,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
+# End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows,web,maven
