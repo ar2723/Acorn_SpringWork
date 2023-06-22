@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring02.member.dao.MemberDao;
 import com.gura.spring02.member.dto.MemberDto;
+import com.gura.spring02.member.service.MemberService;
 
 @Controller
 public class MemberController {
 	
 	@Autowired
-	private MemberDao dao; // <- new MemberDaoImpl() 가 생성되어 dao에 자동으로 들어간다.
-						   // 이는 컴포넌트 스캔에 의해 bean으로 저장되어 관리되고 있기 때문이다.
+	private MemberService service;
 	/*
 	 * @RequestParam(value = "파라미터명", defaultValue = "기본값")
 	 * 기본값은 없어도 되고 파라미터명과 매개변수명이 일치한다면 생략도 가능
@@ -29,7 +29,7 @@ public class MemberController {
 	@RequestMapping("/member/delete")
 	public String delete(@RequestParam(value = "num", defaultValue = "0") int num) {
 		//MemberDao 객체를 이용해서 삭제
-		dao.delete(num);
+		service.delete(num);
 		//목록보기로 리다이렉트 응답
 		return "redirect:/member/list";
 	}
@@ -38,7 +38,7 @@ public class MemberController {
 	@RequestMapping("/member/insert")
 	public String insert(MemberDto dto) {
 		//MemberDao 객체를 이용해서 DB에 저장
-		dao.insert(dto);
+		service.insert(dto);
 		//view page로 forward 이동해서 응답
 		return "member/insert";
 	}
@@ -60,7 +60,7 @@ public class MemberController {
 	//회원 정보 수정 요청 처리
 	@RequestMapping(method = RequestMethod.POST, value="/member/update")
 	public String update(MemberDto dto) {
-		dao.update(dto);
+		service.update(dto);
 		//view page로 forward 이동해서 응답
 		return "member/update";
 	}
@@ -69,12 +69,11 @@ public class MemberController {
 	@RequestMapping("/member/updateform")
 	public ModelAndView updateform(ModelAndView mView, int num) {
 		//수정할 회원의 정보를 얻어온다.
-		MemberDto dto = dao.getData(num);
+		service.getData(mView, num);
 		/*
 		 * 수정할 회원의 정보를 ModelAndView 객체의 addObject(key, value) 메소드를 이용해서 담는다.
 		 * ModelAndView 객체에 담은 값은 결국 HttpServletRequest 객체에 담긴다(request scope에 담긴다)
 		 */
-		mView.addObject("dto", dto); //request.setAttribute("dto", dto)를 대신해서 해준다.
 		mView.setViewName("member/updateform");
 		//모델(data)와 view page의 정보가 모두 담긴 ModelAndView 객체를 리턴해주면 spring이 알아서 처리해준다.
 		return mView;
@@ -82,12 +81,12 @@ public class MemberController {
 		
 	//회원 목록 보기 요청 처리
 	@RequestMapping("/member/list")
-	public String list(HttpServletRequest request) {
+	public ModelAndView list(ModelAndView mView) {
 		//회원 목록을 얻어와서
-		List<MemberDto> list = dao.getList();
+		service.getList(mView);
 		//request scope에 담고
-		request.setAttribute("list", list);
+		mView.setViewName("member/list");
 		// /WEB-INF/views/member/list.jsp 페이지로 forward 이동해서 응답
-		return "member/list";
+		return mView;
 	}
 }
