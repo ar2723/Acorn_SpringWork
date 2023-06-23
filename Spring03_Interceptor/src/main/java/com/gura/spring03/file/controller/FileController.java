@@ -1,6 +1,8 @@
 package com.gura.spring03.file.controller;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,15 +25,10 @@ import com.gura.spring03.file.dto.FileDto;
 public class FileController {
 	
 	@ResponseBody
-	@RequestMapping(method= RequestMethod.POST, value="/image/upload")
-	public FileDto imageJson(FileDto dto, HttpServletRequest request) {
+	@RequestMapping(method = RequestMethod.POST, value="/image/upload")
+	public Map<String, Object> imageUpload(MultipartFile image, HttpServletRequest request) {
 
-		  MultipartFile myFile = dto.getMyFile();
-
-	      String orgFileName=myFile.getOriginalFilename();
-
-	      long fileSize=myFile.getSize();
-	      
+	      String orgFileName=image.getOriginalFilename();
 	      String realPath=request.getServletContext().getRealPath("/resources/upload");
 
 	      String filePath=realPath+File.separator;
@@ -44,12 +41,18 @@ public class FileController {
 	      String saveFileName=
 	            System.currentTimeMillis()+orgFileName;
 	      try {
-	         myFile.transferTo(new File(filePath+saveFileName));
+	    	  image.transferTo(new File(filePath+saveFileName));
 	         System.out.println(filePath+saveFileName);
 	      }catch(Exception e) {
 	         e.printStackTrace();
 	      }
-		return dto;
+	      
+	      //Map 객체에
+	      Map<String, Object> map = new HashMap<>();
+	      // "imagePath" 라는 키값으로 업로드된 이미지를 요청할수 있는 경로를 담아서
+	      map.put("imagePath", "/resources/upload/"+saveFileName);
+	      // 리턴해주면 {"imagePath":"xxx"} 형식의 json 문자열이 응답된다.
+	      return map;
 	}
 	
 	
