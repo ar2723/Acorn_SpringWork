@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/users/info.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <style>
 	/* 프로필 이미지를 작은 원형으로 만든다 */
 	#profileImage{
