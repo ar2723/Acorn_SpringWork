@@ -26,7 +26,7 @@
       	FROM
        		(SELECT result1.*, ROWNUM AS rnum
         	FROM
-            	(SELECT num,writer,title,orgFileName,saveFileName, fileSize,regdate
+            	(SELECT num, writer, title, orgFileName, saveFileName, fileSize, regdate
             	FROM board_file
             	<choose>
 		      		<when test="title != null and orgFileName != null">
