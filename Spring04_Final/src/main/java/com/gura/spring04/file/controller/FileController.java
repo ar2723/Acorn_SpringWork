@@ -17,8 +17,7 @@ public class FileController {
 	private FileService service;
 	
 	@RequestMapping("/file/list")
-	//requestScope에 데이터를 담아서 service 메소드에 전달하는 것은
-	//폼을 통해 필요한 매개변수 데이터가 전달되었다는 말이다.
+	//여기서 전달된 request 객체는 list.jsp에서 폼으로 전달된 데이터를 매개변수로 받아서 전달하는 역할을 한다.
 	public String list(HttpServletRequest request) {
 		service.getList(request);
 		return "file/list";
@@ -30,7 +29,7 @@ public class FileController {
 	   }
 	   
 	   @RequestMapping("/file/upload")
-	   //여기서 폼을 통해 제출한 파일의 객체의 참조값이 dto에 자동으로 담기게 되고, 이는 service 처리에서
+	   //여기서 폼을 통해 제출한 파일의 객체의 참조값이 dto에 자동으로 담기게 되고, 이는 service.savaFile 처리에서
 	   //MultipartFile 타입 변수로 받아서 해당 파일 객체의 정보를 추출하게 된다.
 	   //여기서 request 객체는 폼으로 전달되는 매개변수를 추출하기 위한 것이 아닌, service에서 처리에서 파일 경로 설정을 위해
 	   //미리 생성해서 전달해주는 것이다.
