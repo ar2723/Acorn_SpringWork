@@ -37,7 +37,7 @@ public class CafeServiceImpl implements CafeService{
 	      String strPageNum=request.getParameter("pageNum");
 	      //만일 페이지 번호가 파라미터로 넘어 온다면
 	      if(strPageNum != null){
-	         //숫자로 바꿔서 보여줄 페이지 번호로 지정한다.
+	         //strPageNum이 String type이기 때문에 정수 타입 데이터로 바꿔서 보여줄 페이지 번호로 지정한다.
 	         pageNum=Integer.parseInt(strPageNum);
 	      }   
 	      
@@ -62,25 +62,28 @@ public class CafeServiceImpl implements CafeService{
 
 	      //특수기호를 인코딩한 키워드를 미리 준비한다. 
 	      String encodedK=URLEncoder.encode(keyword);
-	         
-	      //CafeDto 객체에 startRowNum 과 endRowNum 을 담는다.
-	      CafeDto dto=new CafeDto();
-	      dto.setStartRowNum(startRowNum);
-	      dto.setEndRowNum(endRowNum);
-	   
-	      //만일 검색 키워드가 넘어온다면 
-	      if(!keyword.equals("")){
-	         //검색 조건이 무엇이냐에 따라 분기 하기
-	         if(condition.equals("title_content")){//제목 + 파일명 검색인 경우
-	            dto.setTitle(keyword);
-	            dto.setContent(keyword);
-	         }else if(condition.equals("title")){ //제목 검색인 경우
-	            dto.setTitle(keyword);
-	         }else if(condition.equals("writer")){ //작성자 검색인 경우
-	            dto.setWriter(keyword);
-	         } // 다른 검색 조건을 추가 하고 싶다면 아래에 else if() 를 계속 추가 하면 된다.
-	      }
 	      
+	      //DB에서 필요한 데이터를 SELECT해서 가져오기 위해 dto에 필요한 정보(조건)를 담는다.
+	      
+		      //CafeDto 객체에 startRowNum 과 endRowNum 을 담는다.
+		      CafeDto dto=new CafeDto();
+		      dto.setStartRowNum(startRowNum);
+		      dto.setEndRowNum(endRowNum);
+		   
+		      //만일 검색 키워드가 넘어온다면 
+		      if(!keyword.equals("")){
+		         //검색 조건이 무엇이냐에 따라 분기 하기
+		         if(condition.equals("title_content")){//제목 + 내용 검색인 경우
+		            dto.setTitle(keyword);
+		            dto.setContent(keyword);
+		         }else if(condition.equals("title")){ //제목 검색인 경우
+		            dto.setTitle(keyword);
+		         }else if(condition.equals("writer")){ //작성자 검색인 경우
+		            dto.setWriter(keyword);
+		         } // 다른 검색 조건을 추가 하고 싶다면 아래에 else if() 를 계속 추가 하면 된다.
+		      }
+		      
+	      //dto에 정보를 모두 담아서 dao.getList() 메소드에 인자로 전달해준다.
 	      
 	      //게시글 목록을 select 해 온다.(검색 키워드가 있는경우 키워드에 부합하는 전체 글) 
 	      List<CafeDto> list=cafeDao.getList(dto);
@@ -106,9 +109,9 @@ public class CafeServiceImpl implements CafeService{
 	      request.setAttribute("startPageNum", startPageNum);
 	      request.setAttribute("endPageNum", endPageNum);
 	      request.setAttribute("totalPageCount", totalPageCount);
+	      request.setAttribute("totalRow", totalRow);
 	      request.setAttribute("keyword", keyword);
 	      request.setAttribute("encodedK", encodedK);
-	      request.setAttribute("totalRow", totalRow); 
 	      request.setAttribute("condition", condition);	
 	}
 
@@ -161,11 +164,12 @@ public class CafeServiceImpl implements CafeService{
 	     //한 페이지에 몇개씩 표시할 것인지
 	     final int PAGE_ROW_COUNT=10;
 	     //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
-	     int pageNum=1;
+	     int pageNum = 1;
 	     //보여줄 페이지의 시작 ROWNUM
 	     int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
 	     //보여줄 페이지의 끝 ROWNUM
 	     int endRowNum=pageNum*PAGE_ROW_COUNT;
+	     
 	     //원글의 글번호를 이용해서 해당글에 달린 댓글 목록을 얻어온다.
 	     CafeCommentDto commentDto=new CafeCommentDto();
 	     commentDto.setRef_group(num);
@@ -230,20 +234,22 @@ public class CafeServiceImpl implements CafeService{
 
 	@Override
 	public void saveComment(HttpServletRequest request) {
-		//폼 전송되는 파라미터 추출
+		//폼 전송되는 파라미터 추출 (원 글의 번호, 원 글의 작성자, 댓글 내용)
 		int ref_group = Integer.parseInt(request.getParameter("ref_group"));
 		String target_id = request.getParameter("target_id");
 		String content = request.getParameter("content");
 		/*
-		 * 원글의 댓글은 comment_group 번호가 전송이 안되고
-		 * 댓글의 댓글의 comment_group 번호가 전송이 된다.
-		 * 따라서 null 여부를 조사하면 원글의 댓글인지 댓글의 댓글인지 판단할 수 있다.
+		 * 원글의 댓글은 폼 제출 시에는 comment_group 번호가 전송이 되지 않는다.
+		 * 대댓글의 경우 폼 제출 시에 comment_group 번호가 담겨서 전송이 되기 때문에
+		 * 전송되는 comment_group 값에 대한 null 여부를 조사하면 원글의 댓글인지 댓글의 댓글인지 판단할 수 있다.
 		 */
 		String comment_group = request.getParameter("comment_group");
 		
 		//댓글 작성자는 session 영역에서 얻어내기
 		String writer=(String)request.getSession().getAttribute("id");
+		
 		//댓글의 시퀀스 번호 미리 얻어내기
+		//이유? - 
 		int seq = cafeCommentDao.getSequence();
 		
 		//저장할 댓글의 정보를 dto에 담기
@@ -255,9 +261,9 @@ public class CafeServiceImpl implements CafeService{
 		dto.setRef_group(ref_group);
 		//원글의 댓글인경우
 		if(comment_group == null) {
-			//댓글의 글번호를 comment_group 번호로 사용한다.
+			//댓글의 comment_group 번호를 댓글의 글 번호로 사용한다.
 			dto.setComment_group(seq);
-		} else {
+		} else { //원글의 대댓글인 경우
 			//전송된 comment_group 번호를 숫자로 바꿔서 dto에 넣어준다.
 			dto.setComment_group(Integer.parseInt(comment_group));
 		}
@@ -268,21 +274,20 @@ public class CafeServiceImpl implements CafeService{
 
 	@Override
 	public void deleteComment(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		
+		int num = Integer.parseInt(request.getParameter("num"));
+		cafeCommentDao.delete(num);
 	}
 
 	@Override
 	public void updateComment(CafeCommentDto dto) {
-		// TODO Auto-generated method stub
-		
+		cafeCommentDao.update(dto);
 	}
 
 	@Override
 	public void moreCommentList(HttpServletRequest request) {
 		//로그인된 아이디
 		String id = (String)request.getSession().getAttribute("id");
-		//ajax 요청 파라미터로 넘어오는 댓글의 페이지 번호를 읽어낸다.
+		//ajax 요청 파라미터로 넘어오는 댓글의 페이지 번호(currentPage, 최소 2부터 시작)를 읽어낸다.
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		//ajax 요청 파라미터로 넘어오는 원글의 글 번호를 읽어낸다.
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -312,7 +317,7 @@ public class CafeServiceImpl implements CafeService{
 		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 	
 		//view page 에 필요한 값 request 에 담아주기
-		request.setAttribute("commentList", commentList);
+		request.setAttribute("commentList", commentList); //스크롤을 통해 추가로 불러올 댓글,대댓글 리스트
  		request.setAttribute("num", num); //원글의 글번호
  		request.setAttribute("pageNum", pageNum); //댓글의 페이지 번호
 	}

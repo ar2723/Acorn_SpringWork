@@ -30,7 +30,8 @@
 						<td>${tmp.num }</td>
 						<td>${tmp.writer }</td>
 						<td>
-							<a href="${pageContext.request.contextPath }/cafe/detail?num=${tmp.num }&condition=${condition}&keyword=${encodedK}">${tmp.title }</a>
+							<a href="${pageContext.request.contextPath}/cafe/detail?
+									num=${tmp.num}&condition=${condition}&keyword=${encodedK}">${tmp.title}</a>
 						</td>
 						<td>${tmp.viewCount }</td>
 						<td>${tmp.regdate }</td>
@@ -41,30 +42,37 @@
 		<nav>
 			<ul class="pagination">
 				<%--
-					startPageNum 이 1 이 아닌 경우에만 Prev 링크를 제공한다. 
+					startPageNum 이 1 이 아닌 경우에만 Prev 링크를 제공한다.
+					만약, PAGE_DISPLAY_COUNT가 5라면, 5페이지를 불러올때까지  startPageNum은 1이고
+					6페이지를 불러올때 startPageNum이 6이 되기 때문에  Prev 링크가 나타나게 된다.
+					
 					&condition=${condition}&keyword=${encodedK}
 				 --%>
-				<c:if test="${startPageNum ne 1 }">
+				<c:if test="${startPageNum ne 1}">
 					<li class="page-item">
-						<a class="page-link" href="list?pageNum=${startPageNum-1 }&condition=${condition}&keyword=${encodedK}">Prev</a>
+						<a class="page-link" href="list?pageNum=${startPageNum-1}&condition=${condition}&keyword=${encodedK}">Prev</a>
 					</li>
 				</c:if>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
 					<li class="page-item ${pageNum eq i ? 'active' : '' }">
 						<a class="page-link animate__animated" href="list?pageNum=${i}&condition = ${condition}&keyword=${encodedK}">${i}</a>
 					</li>
 				</c:forEach>
 				<%--
-					마지막 페이지 번호가 전체 페이지의 갯수보다 작으면 Next 링크를 제공한다. 
+					마지막 페이지 번호가 전체 페이지의 갯수보다 작으면 Next 링크를 제공한다.
+					만약, 6페이지를 불러올 때 전체 페이지 갯수가 12개 그리고
+					PAGE_DISPLAY_COUNT가 5이면 10페이지가 마지막 페이지 번호이고 옆에 Next 링크가 나타난다.
 				 --%>
 				<c:if test="${endPageNum lt totalPageCount }">
 					<li class="page-item">
-						<a class="page-link" href="list?pageNum=${endPageNum+1 }&condition=${condition}&keyword=${encodedK}">Next</a>
+						<a class="page-link" href="list?pageNum=${endPageNum+1}&condition=${condition}&keyword=${encodedK}">Next</a>
 					</li>
 				</c:if>				
 			</ul>
 		</nav>
 		<script>
+			//querySelectorAll()은 배열을 반환하기 때문에 바로 .addEventListener()를 사용할수는 없고 
+			//forEach(item)으로 각 배열의 원소(item)별로 .addEventListener()를 붙여주면 된다.
 			document.querySelectorAll(".pagination a").forEach((item)=>{
 				//item은 li의 참조값이다 모든 li 요소에 mouseover 이벤트가 발생했을 때 실행할 함수 등록
 				item.addEventListener("mouseover", (e)=>{
@@ -78,7 +86,8 @@
 				})
 			})
 		</script>
-				<!-- 검색 폼 -->
+		
+		<!-- 검색 폼 -->
 		<form action="list" method="get">
 			<label for="condition">검색조건</label>	
 			<select name="condition" id="condition">
@@ -89,7 +98,7 @@
 			<input type="text" name="keyword" placeholder="검색어..." value="${keyword }"/>
 			<button type="submit">검색</button>
 		</form>
-		<c:if test="${not empty condition }">
+		<c:if test="${not empty condition}">
 			<p>
 				<strong>${totalRow }</strong> 개의 자료가 검색 되었습니다.
 				<a href="list">리셋</a>
