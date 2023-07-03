@@ -1,5 +1,8 @@
 package com.gura.spring04.cafe.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,16 +46,22 @@ public class CafeController {
 	
 	@ResponseBody
 	@RequestMapping("/cafe/comment_update")
-	public boolean commentUpdate(CafeCommentDto dto) {
+	public Map<String, Object> commentUpdate(CafeCommentDto dto) {
 		service.updateComment(dto);
-		return true;
+		Map<String, Object> map=new HashMap<String, Object>();
+	    map.put("isSuccess", true);
+	    //{"isSuccess": true} 형식의 JSON 문자열이 응답되도록 한다.
+	    return map;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/cafe/comment_delete")
-	public boolean commentDelete(HttpServletRequest request) {
+	public Map<String, Object> commentDelete(HttpServletRequest request) {
 		service.deleteComment(request);
-		return true;
+		Map<String, Object> map=new HashMap<String, Object>();
+	    map.put("isSuccess", true);
+	    //{"isSuccess": true} 형식의 JSON 문자열이 응답되도록 한다.
+	    return map;
 	}
 	
 	@RequestMapping("/cafe/list")

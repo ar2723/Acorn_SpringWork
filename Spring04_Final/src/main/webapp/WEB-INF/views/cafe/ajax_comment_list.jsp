@@ -10,7 +10,7 @@
       <c:otherwise>
          <c:if test="${tmp.num eq tmp.comment_group}">
          	<!-- 댓글인 경우 -->
-            <li id="reli${tmp.num }" class="page-${pageNum}"> <!-- pageNum == currentPage(229) -->
+            <li id="reli${tmp.num}" class="page-${pageNum}">
          </c:if>
          
          <c:if test="${tmp.num ne tmp.comment_group}">

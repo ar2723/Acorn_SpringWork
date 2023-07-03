@@ -45,6 +45,7 @@ public class CafeCommentDaoImpl implements CafeCommentDao{
 	public CafeCommentDto getData(int num) {
 		return session.selectOne("cafeComment.getData", num);
 	}
+	
 	//하나의 원글에 몇개의 댓글이 있는지 리턴하는 메소드
 	@Override
 	public int getCount(int ref_group) {

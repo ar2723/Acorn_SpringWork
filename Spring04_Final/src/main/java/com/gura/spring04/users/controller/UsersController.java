@@ -46,7 +46,6 @@ public class UsersController {
 	//로그인 폼 요청처리
 	@RequestMapping(method= RequestMethod.GET, value = "/users/loginform")
 	public String loginForm() {
-		
 		return "users/loginform";
 	}
 	

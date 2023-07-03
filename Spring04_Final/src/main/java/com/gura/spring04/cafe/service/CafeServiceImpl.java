@@ -1,7 +1,9 @@
 package com.gura.spring04.cafe.service;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -219,7 +221,6 @@ public class CafeServiceImpl implements CafeService{
 		}
 		//글 삭제하기
 		cafeDao.delete(num);
-		
 	}
 
 	@Override
@@ -275,12 +276,20 @@ public class CafeServiceImpl implements CafeService{
 	@Override
 	public void deleteComment(HttpServletRequest request) {
 		int num = Integer.parseInt(request.getParameter("num"));
+		//삭제할 댓글 정보를 읽어와서
+		CafeCommentDto dto = cafeCommentDao.getData(num);
+		String id = (String)request.getSession().getAttribute("id");
+		//글 작성자와 로그인된 아이디와 일치하지 않으면
+		if(!dto.getWriter().equals(id)) {
+			throw new NotDeleteException("다른 사람의 댓글을 지울 수 없습니다!");
+		}
+		//dao를 이용해서 DB에서 삭제하기
 		cafeCommentDao.delete(num);
 	}
 
 	@Override
 	public void updateComment(CafeCommentDto dto) {
-		cafeCommentDao.update(dto);
+		cafeCommentDao.update(dto); 
 	}
 
 	@Override

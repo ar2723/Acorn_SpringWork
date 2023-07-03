@@ -150,7 +150,7 @@
                            <form id="reForm${tmp.num}" class="animate__animated comment-form re-insert-form" action="comment_insert" method="post">
                               <!-- 원글의 번호 -->
                               <input type="hidden" name="ref_group" value="${dto.num}"/>
-                              <!-- 대댓글을 작성하는 댓글의 작성자 명 -->
+                              <!-- 대댓글의 대상이 되는 댓글의 작성자 명 -->
                               <input type="hidden" name="target_id" value="${tmp.writer}"/>
                               <!-- 대댓글의 그룹번호는 대댓글을 작성하는 댓글의 그룹번호를 배정 -->
                               <input type="hidden" name="comment_group" value="${tmp.comment_group}"/>
@@ -208,11 +208,10 @@
       let currentPage=1;
       
       //마지막 페이지는 totalPageCount 이다.  
-      let lastPage=${totalPageCount};
+      let lastPage = ${totalPageCount};
       
       //추가로 댓글을 요청하고 그 작업이 끝났는지 여부를 관리할 변수 
-      let isLoading=false; //현재 로딩중인지 여부 
-      
+      let isLoading = false; //현재 로딩중인지 여부 
       
       //페이지 스크롤을 통해 ajax로 1페이지 이후의 댓글 목록을 불러온다.
       window.addEventListener("scroll", function(){
@@ -248,7 +247,7 @@
                   .insertAdjacentHTML("beforeend", data);
                
                //로딩이 끝났다고 표시한다.
-               isLoading=false;
+               isLoading = false;
                
                //새로 추가된 댓글 li 요소 안에 있는 a 요소를 찾아서 이벤트 리스너 등록 하기 
                addUpdateListener(".page-"+currentPage+" .update-link");
@@ -299,8 +298,8 @@
                      return response.json();
                   })
                   .then(function(data){
-                     //만일 삭제 성공이면 
-                     if(data){
+                     //만일 삭제 성공이면
+                     if(data.isSuccess){
                         //댓글이 있는 곳에 삭제된 댓글입니다를 출력해 준다. 
                         document.querySelector("#reli"+num).innerText="삭제된 댓글입니다.";
                      }
@@ -326,8 +325,8 @@
                   return;
                }
                //click 이벤트가 일어난 바로 그 요소의 data-num 속성의 value 값(댓글의 글번호)을 읽어온다. 
-               const num=this.getAttribute("data-num"); 
-               const form=document.querySelector("#reForm"+num);
+               const num = this.getAttribute("data-num"); 
+               const form = document.querySelector("#reForm"+num);
                
                //현재 문자열을 읽어온다 ( "답글" or "취소" )
                let current = this.innerText;
@@ -360,7 +359,7 @@
             //폼에 submit 이벤트가 일어났을때 호출되는 함수 등록 
             updateForms[i].addEventListener("submit", function(e){
                //submit 이벤트가 일어난 form 의 참조값을 form 이라는 변수에 담기 
-               const form=this;
+               const form = e.target; // 또는 this 라고 적어도 됨
                //폼 제출을 막은 다음 
                e.preventDefault();
                //이벤트가 일어난 폼을 ajax 전송하도록 한다.
@@ -369,14 +368,13 @@
                   return response.json();
                })
                .then(function(data){
-            	   console.log(data);
-                  if(data){
+                  if(data.isSuccess){
                 	 //수정 폼에 있는 수정할 댓글의 번호 값 읽어오기
-                     const num=form.querySelector("input[name=num]").value;
+                     const num = form.querySelector("input[name=num]").value;
                 	 //수정 폼에 입력한 value 값 읽어오기
-                     const content=form.querySelector("textarea[name=content]").value;
+                     const content = form.querySelector("textarea[name=content]").value;
                      //수정 폼에 입력한 value 값을 pre 요소(댓글 내용)에 반영하기 
-                     document.querySelector("#pre"+num).innerText=content;
+                     document.querySelector("#pre"+num).innerText = content;
                      //수정 완료 후 댓글 수정 폼 닫기
                      form.style.display="none";
                   }
