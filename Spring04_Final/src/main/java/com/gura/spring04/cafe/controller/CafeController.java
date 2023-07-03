@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gura.spring04.cafe.dto.CafeCommentDto;
@@ -16,8 +17,10 @@ public class CafeController {
 	@Autowired
 	private CafeService service;
 	
+	
 	//새로운 댓글 저장 요청 처리
 	@RequestMapping("/cafe/comment_insert")
+	//request 객체에는 ref_group, target_id, content가 담기고, ref_group에도 마찬가지로 동일명의 파라미터 값이 담긴다.
 	public String commentInsert(HttpServletRequest request, int ref_group) {
 		//새로운 댓글을 저장하는 로직을 수행한다.
 		service.saveComment(request);
@@ -38,10 +41,18 @@ public class CafeController {
 		return "cafe/ajax_comment_list";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/cafe/comment_update")
-	public String commentDelete(CafeCommentDto dto, int ref_group) {
+	public boolean commentUpdate(CafeCommentDto dto) {
 		service.updateComment(dto);
-		return "redirect:/cafe/detail?num="+ref_group;
+		return true;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/cafe/comment_delete")
+	public boolean commentDelete(HttpServletRequest request) {
+		service.deleteComment(request);
+		return true;
 	}
 	
 	@RequestMapping("/cafe/list")

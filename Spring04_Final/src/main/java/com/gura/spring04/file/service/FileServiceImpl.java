@@ -144,7 +144,8 @@ public class FileServiceImpl implements FileService{
 	      dto.setOrgFileName(orgFileName);
 	      dto.setSaveFileName(saveFileName);
 	      dto.setFileSize(fileSize);
-	      //fileDao 를 이용해서 업로드된 파일의 정보를 DB 에 저장하기 (DB에 파일 자체를 저장하는 것은 아님)
+	      
+	      //fileDao를 이용해서 업로드된 파일의 정보를 DB 에 저장하기 (DB에 파일 자체를 저장하는 것은 아님)
 	      dao.insert(dto);
 	      //view 페이지에서 사용할 모델 담기 
 	      mView.addObject("dto", dto);

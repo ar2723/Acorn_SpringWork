@@ -32,7 +32,7 @@
 					</svg>
 				</c:when>
 				<c:otherwise>
-					<img id="profileImage" src="${pageContext.request.contextPath }${ dto.profile}">
+					<img id="profileImage" src="${pageContext.request.contextPath }${dto.profile}">
 				</c:otherwise>
 			</c:choose>
 		</a>
