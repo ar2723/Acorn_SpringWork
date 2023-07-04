@@ -20,7 +20,7 @@
             	ORDER BY num DESC) result1)
       	WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
-	<select id="getCount" parameterType="galleryDto" resultType="int">
+	<select id="getCount" resultType="int">
       	SELECT NVL(MAX(ROWNUM), 0)
       	FROM board_gallery
     </select>
@@ -28,9 +28,9 @@
       	SELECT result1.*
       	FROM
          (SELECT num, writer, imagepath, caption,TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,
-            LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
-               LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
-          FROM board_gallery ) result1
+            	LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
+            	LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
+         FROM board_gallery ) result1
       WHERE num = #{num}
    	</select>
 </mapper>

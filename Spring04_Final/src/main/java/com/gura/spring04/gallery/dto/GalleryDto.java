@@ -8,8 +8,6 @@ public class GalleryDto {
 	private String caption;
 	private String imagePath;
 	private String regdate;
-	private String orgFileName;
-	private String saveFileName;
 	private int startRowNum;
 	private int endRowNum;
 	private MultipartFile myFile;
@@ -18,16 +16,14 @@ public class GalleryDto {
 	
 	public GalleryDto() {}
 
-	public GalleryDto(int num, String writer, String caption, String imagePath, String regdate, String orgFileName,
-			String saveFileName, int startRowNum, int endRowNum, MultipartFile myFile) {
+	public GalleryDto(int num, String writer, String caption, String imagePath, 
+			String regdate, int startRowNum, int endRowNum, MultipartFile myFile) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.caption = caption;
 		this.imagePath = imagePath;
 		this.regdate = regdate;
-		this.orgFileName = orgFileName;
-		this.saveFileName = saveFileName;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.myFile = myFile;
@@ -71,22 +67,6 @@ public class GalleryDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
-	}
-
-	public String getOrgFileName() {
-		return orgFileName;
-	}
-
-	public void setOrgFileName(String orgFileName) {
-		this.orgFileName = orgFileName;
-	}
-
-	public String getSaveFileName() {
-		return saveFileName;
-	}
-
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
 	}
 
 	public int getStartRowNum() {

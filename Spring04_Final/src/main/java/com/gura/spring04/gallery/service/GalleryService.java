@@ -7,10 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gura.spring04.gallery.dto.GalleryDto;
 
 public interface GalleryService {
-	//이미지 리스트 얻어오기
+	//갤러리의 리스트 얻어오기
 	public void getList(HttpServletRequest request);
-	//업로드 된 이미지 저장하기
+	//갤러리에 사진 upload & DB 저장하기
 	public void saveImage(GalleryDto dto, HttpServletRequest request);
-	//이미지 하나의 정보 얻어오기
+	//갤러리 detail 페이지에 필요한 data를 ModelAndView 에 저장
 	public void getData(int num, ModelAndView mView);
 }

@@ -10,14 +10,18 @@
 <style>
    /* card 이미지 부모요소의 높이 지정 */
    .img-wrapper{
+   
       height: 250px;
       /* transform 을 적용할대 0.3s 동안 순차적으로 적용하기 */
       transition: transform 0.3s ease-out;
+      
    }
    /* .img-wrapper 에 마우스가 hover 되었을때 적용할 css */
    .img-wrapper:hover{
+   
       /* 원본 크기의 1.1 배로 확대 시키기*/
       transform: scale(1.1);
+      
    }
    
    .card .card-text{
@@ -44,6 +48,7 @@
 <body>
 <div class="container">
       <a href="${pageContext.request.contextPath}/gallery/upload_form">사진 업로드 하러 가기</a>
+      <a href="${pageContext.request.contextPath}/gallery/upload_form2">사진 업로드 하러 가기2</a>
       <h1>겔러리 목록 입니다.</h1>
       <div class="row">
       <c:forEach var="tmp" items="${list}">
