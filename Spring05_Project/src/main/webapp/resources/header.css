@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+header{
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	backGround-color: rgb(37, 36, 40);
+}
+
+.boardList{
+	display: flex;
+	align-items: center;
+}
+.boardList li{
+	margin-left: 15px;
+	list-style-type: none;
+}
+.boardList li a{
+	color: white;
+}
+.login{
+	display: flex;
+	align-items: center;
+}
+.login li{
+	margin-right: 15px;
+	list-style-type: none;
+}
+
+.login li a{
+	color: white;
+}
+
+a{
+	text-decoration: none;
+}
