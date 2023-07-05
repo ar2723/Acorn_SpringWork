@@ -51,12 +51,6 @@
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/file/*"/>
-			<exclude-mapping path="/file/list"/>
-			<exclude-mapping path="/file/download"/>
-			<beans:ref bean="loginInterceptor"/>
-		</interceptor>
-		<interceptor>
 			<mapping path="/cafe/*"/>
 			<exclude-mapping path="/cafe/list"/>
 			<exclude-mapping path="/cafe/detail"/>

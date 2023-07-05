@@ -19,7 +19,7 @@
 		<div class="boardList">
 			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
 			<li><a href="${pageContext.request.contextPath}/info/list">공략 & 꿀팁</a></li>
-			<li><a href="${pageContext.request.contextPath}/cafe/jobList">직업별 게시판</a></li>
+			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업별 게시판</a></li>
 			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
 		</div>
 		<div class="login">
