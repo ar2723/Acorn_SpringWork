@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<h3 class="text-center mt-3">직업 게시판</h3>
+		<h3 class="mt-2 mb-2 d-flex justify-content-center align-items-center">
+		<img src="${pageContext.request.contextPath}/resources/images/pig.png"
+			width="50" height="50">직업 게시판</h3>
 		<table class="table">
 			<thead class="border-dark text-center">
 				<tr>
@@ -31,7 +33,7 @@
 						<td>
 						<c:choose>
 						<c:when test="${tmp.className == 'warrior'}">
-							<small style="color:yellow">[전사] </small>
+							<small style="color:orange">[전사] </small>
 						</c:when>
 						<c:when test="${tmp.className == 'archer'}">
 							<small style="color:green">[궁수] </small>
@@ -105,5 +107,6 @@
 			</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

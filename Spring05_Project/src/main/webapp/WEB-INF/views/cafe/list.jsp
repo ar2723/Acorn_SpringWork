@@ -10,10 +10,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<h3 class="text-center mt-3">자유게시판</h3>
+		<h3 class="mt-2 mb-2 d-flex justify-content-center align-items-center">
+		<img src="${pageContext.request.contextPath}/resources/images/maple.png"
+			width="50" height="50">자유게시판</h3>
 		<table class="table">
 			<thead class="border-dark text-center">
 				<tr>
@@ -103,6 +105,7 @@
 			</form>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>
 

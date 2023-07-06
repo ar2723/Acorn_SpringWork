@@ -14,10 +14,11 @@
 	}
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>메이플 스토리 커뮤니티에 오신걸 환영합니다</h1>
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

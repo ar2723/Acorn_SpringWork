@@ -50,11 +50,12 @@
       }
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 	      
-	      <h3 class="text-center">코디 저장소</h3>
+	      <h3 class="mt-2 mb-2 d-flex justify-content-center align-items-center"><img src="${pageContext.request.contextPath}/resources/images/blueSA.png"
+			width="50" height="50">코디 저장소</h3>
 	      <div class="row">
 	      <c:forEach var="tmp" items="${list}">
 	         <div class="col-3">
@@ -121,5 +122,6 @@
 	      </ul>
 	   </nav>   
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

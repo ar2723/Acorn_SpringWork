@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 </head>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
    <div class="container">
       <!-- 로그인된 아이디와 글의 작성자가 같으면 수정, 삭제 링크를 제공한다. -->
@@ -177,6 +177,7 @@
          <button type="submit">등록</button>
       </form>
    </div>
+   <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
    <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
    <script>
       //클라이언트가 로그인 했는지 여부

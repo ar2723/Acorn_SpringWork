@@ -12,14 +12,14 @@
 		width="45" height="40" class="d-inline-block align-text-top">
 		</a>
 			<img style="margin-left:40px" src="${pageContext.request.contextPath}/resources/images/maple.png"
-			width="30" height="25" class="d-inline-block">
+			width="35" height="35" class="d-inline-block">
 			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
 			<img src="${pageContext.request.contextPath}/resources/images/pig.png"
 			width="35" height="35" class="d-inline-block">
 			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업 게시판
 			</a></li>
 			<img src="${pageContext.request.contextPath}/resources/images/blueSA.png"
-			width="30" height="25" class="d-inline-block">
+			width="35" height="35" class="d-inline-block">
 			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
 	</div>
 	<div class="login">
