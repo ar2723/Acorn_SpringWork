@@ -15,32 +15,9 @@
 </style>
 </head>
 <body>
-	<header>
-		<div class="boardList">
-			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/info/list">공략 & 꿀팁</a></li>
-			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업별 게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
-		</div>
-		<div class="login">
-			<c:choose>
-				<c:when test="${empty sessionScope.id}">
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/loginform">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/signup_form">회원가입</a></li>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/info">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/logout">로그아웃</a></li>
-					</p>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		
 		<h1>메이플 스토리 커뮤니티에 오신걸 환영합니다</h1>
+	</div>
 </body>
 </html>

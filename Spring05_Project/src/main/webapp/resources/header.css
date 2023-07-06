@@ -4,7 +4,7 @@ header{
 	display:flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 40px;
+	height: 50px;
 	backGround-color: rgb(37, 36, 40);
 }
 
@@ -13,7 +13,7 @@ header{
 	align-items: center;
 }
 .boardList li{
-	margin-left: 15px;
+	margin: 0 10px;
 	list-style-type: none;
 }
 .boardList li a{

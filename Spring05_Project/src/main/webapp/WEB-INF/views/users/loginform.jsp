@@ -6,39 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/users/loginform.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <style>
-	body{
-		display: flex;
-		width: 100%;
-		height: 100vh;
-		justify-content: center;
-		align-items: center;
-	}
-	.container{
-		width: 350px;
-		height: 300px;
-		border: 2px solid rgb(246, 133, 0);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	form{
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-	input{
-		width: 300px;
-		height: 50px;
-		margin-bottom: 10px;
-	}
-	button{
-		
-	}
 </style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/users/login" method="post">
 			<c:choose>

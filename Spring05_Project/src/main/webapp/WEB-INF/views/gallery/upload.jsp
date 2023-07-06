@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/gallery/upload.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<script>
-		alert("사진 업로드에 성공했습니다.");
+		alert("코디를 등록 했습니다");
 		location.href = "${pageContext.request.contextPath}/gallery/list";
 	</script>
 </body>

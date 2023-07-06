@@ -11,30 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 </head>
 <body>
-	<header>
-		<div class="boardList">
-			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/info/list">공략 & 꿀팁</a></li>
-			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업별 게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
-		</div>
-		<div class="login">
-			<c:choose>
-				<c:when test="${empty sessionScope.id}">
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/loginform">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/signup_form">회원가입</a></li>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/info">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/logout">로그아웃</a></li>
-					</p>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 		<h3 class="text-center mt-3">자유게시판</h3>
 		<table class="table">
@@ -67,7 +44,7 @@
 			<a class="btn btn-secondary" href="${pageContext.request.contextPath}/cafe/insertform">글쓰기</a>
 		</li>
 		<nav>
-			<ul class="pagination d-flex justify-content-center">
+			<ul class="pagination pagination-sm d-flex justify-content-center">
 				<%--
 					startPageNum 이 1 이 아닌 경우에만 Prev 링크를 제공한다.
 					만약, PAGE_DISPLAY_COUNT가 5라면, 5페이지를 불러올때까지  startPageNum은 1이고
@@ -113,21 +90,19 @@
 				})
 			})
 		</script>
-		
 		<!-- 검색 폼 -->
 		<div class="d-flex justify-content-center">
-			<form action="list" method="get">
-				<select name="condition" id="condition">
+			<form class="d-flex" action="list" method="get">
+				<select class="form-select" style="width: 150px" name="condition" id="condition">
 					<option value="title_content" ${condition eq 'title_content' ? 'selected' : '' }>제목 + 내용</option>
 					<option value="title" ${condition eq 'title' ? 'selected' : '' }>제목</option>
 					<option value="writer" ${condition eq 'writer' ? 'selected' : '' }>작성자</option>
 				</select>
-				<input type="text" name="keyword" placeholder="Search" value="${keyword}"/>
-				<button type="submit">검색</button>
+				<input class="form-control" type="text" name="keyword" placeholder="Search" value="${keyword}"/>
+				<button class="btn btn-primary" style="width: 120px" type="submit">검색</button>
 			</form>
 		</div>
 	</div>
-	
 </body>
 </html>
 

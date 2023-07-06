@@ -7,6 +7,7 @@ public class ClassCafeDto {
 	private String content;
 	private String className;
 	private int viewCount;
+	private int likeCount;
 	private String regdate;
 	private int startRowNum;
 	private int endRowNum;
@@ -76,6 +77,14 @@ public class ClassCafeDto {
 
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
+	}
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 
 	public String getRegdate() {

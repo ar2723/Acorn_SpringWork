@@ -11,10 +11,12 @@
 <style>
    /* card 이미지 부모요소의 높이 지정 */
    .img-wrapper{
-   
-      height: 250px;
+      height: 200px;
       /* transform 을 적용할대 0.3s 동안 순차적으로 적용하기 */
       transition: transform 0.3s ease-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       
    }
    
@@ -36,61 +38,32 @@
    .card .card-text{
       /* 한줄만 text 가 나오고  한줄 넘는 길이에 대해서는 ... 처리 하는 css */
       display:block;
+      text-align: center;
       white-space : nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
    }
       .img-wrapper img{
-         width: 100%;
-         height: 100%;
-         /* fill | contain | cover | scale-down | none(default) */
-         /*   
-            cover - 부모의 크기에 맞게 키운 후, 자른다. 비율은 일정하게 증가한다. 
-            contain - 안잘린다. 대신 빈 공간이 남을 수 있다.
-            fill - 부모의 크기에 딱 맞게, 비율 관계 없이 맞춘다.(이미지가 일그러질 수 있다.)
-            scale-down - 가로, 세로 중에 큰 것을 부모의 크기에 맞춘 상태까지만 커지거나 작아지고, 비율은 일정하다.
-         */
-      object-fit: cover;   
+         width: 80%;
+         height: 80%;
+      	 object-fit: cover;   
       }
 </style>
 </head>
 <body>
-	<header>
-		<div class="boardList">
-			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/info/list">공략 & 꿀팁</a></li>
-			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업별 게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
-		</div>
-		<div class="login">
-			<c:choose>
-				<c:when test="${empty sessionScope.id}">
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/loginform">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/signup_form">회원가입</a></li>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/info">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/logout">로그아웃</a></li>
-					</p>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 	      
 	      <h3 class="text-center">코디 저장소</h3>
 	      <div class="row">
 	      <c:forEach var="tmp" items="${list}">
 	         <div class="col-3">
-               <div class="card text-bg-light mb-3 max-width: 9rem">
+               <div class="card text-bg-dark mb-3 max-width: 9rem">
 	               <div class="card-body d-flex justify-content-between">
 		               <p class="card-text"><strong>${tmp.writer}</strong></p>
 		               <p><small>${tmp.regdate}</small></p>
 		           </div>
-	               <a href="${pageContext.request.contextPath}/gallery/detail?num=${tmp.num}">
+	               <a href="#">
 	                     <div class="img-wrapper">
 	                        <img class="card-img-top" src="${pageContext.request.contextPath}${tmp.imagePath}" />
 	                     </div>
@@ -103,13 +76,15 @@
 	      </c:forEach>
 	      </div>
 	      <nav>
-	      <a href="${pageContext.request.contextPath}/gallery/upload_form3">내 코디 올리기</a>
-	   <ul class="pagination justify-content-center">
+	      <div class="d-flex justify-content-end">
+	      	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/gallery/upload_form3">내 코디 올리기</a>
+	      </div>
+	   <ul class="pagination pagination-sm justify-content-center">
 	      <c:choose>
 	         <c:when test="${startPageNum ne 1}">
 	            <li class="page-item">
 	                     <a class="page-link" href="${pageContext.request.contextPath}/gallery/list?pageNum=${startPageNum - 1}">Prev</a>
-	               </li>
+	            </li>
 	         </c:when>
 	         <c:otherwise>
 	            <li class="page-item disabled">

@@ -14,26 +14,27 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
-   <div class="container">
-      <!-- 로그인된 아이디와 글의 작성자가 같으면 수정, 삭제 링크를 제공한다. -->
-      <c:if test="${sessionScope.id eq dto.writer}">
-      	<div class="d-flex justify-content-end">
-	       <a class="link-dark me-2" href="updateform?num=${dto.num }">수정하기</a>
-	       <a class="link-dark me-2" href="javascript:" onclick="deleteConfirm()">삭제하기</a>
-        </div>
-         <script>
-            function deleteConfirm(){
-               const isDelete=confirm("이 글을 삭제 하겠습니까?");
-               if(isDelete){
-                  location.href="delete?num=${dto.num}";
-               }
-            }
-         </script>
-      </c:if>
-      <table class="table table-bordered">
-         <tr>
-            <th>글번호</th>
-            <td>${dto.num}</td>
+   	<div class="container">
+      	<table class="table table-bordered">
+        <tr>
+           <th>직업</th>
+            <c:choose>
+				<c:when test="${dto.className == 'warrior'}">
+					<td><small>[전사]</small></td>
+				</c:when>
+				<c:when test="${dto.className == 'archer'}">
+					<td><small>[궁수]</small></td>
+				</c:when>
+				<c:when test="${dto.className == 'thief'}">
+					<td><small>[도적]</small></td>
+				</c:when>
+				<c:when test="${dto.className == 'mage'}">
+					<td><small>[마법사]</small></td>
+				</c:when>
+				<c:when test="${dto.className == 'pirate'}">
+					<td><small>[해적]</small></td>
+				</c:when>
+			</c:choose>
          </tr>
          <tr>
             <th>작성자</th>
@@ -48,6 +49,10 @@
             <td>${dto.viewCount}</td>   
          </tr>
          <tr>
+            <th>추천수</th>
+            <td>${dto.likeCount}</td>   
+         </tr>
+         <tr>
             <th>등록일</th>
             <td>${dto.regdate}</td>
          </tr>
@@ -55,22 +60,40 @@
             <td colspan="2">
                <div>${dto.content}</div>
             </td>
-         </tr>   
+         </tr>
       </table>
-
+      
+	  <div class="justify-content-center">
+	  	<a class="btn btn-primary" 
+	  		href="${pageContext.request.contextPath}/cafe/classCafeAddLike?num=${dto.num}">추천</a>
+	  </div>
+	  
+    <!-- 로그인된 아이디와 글의 작성자가 같으면 수정, 삭제 링크를 제공한다. -->
+    <c:if test="${sessionScope.id eq dto.writer}">
+    	<div class="d-flex justify-content-center">
+	       	<a class="btn btn-warning me-3" href="classCafeUpdateform?num=${dto.num}">수정하기</a>
+	       	<a class="btn btn-danger ms-3" href="javascript:" onclick="deleteConfirm()">삭제하기</a>
+        </div>
+        <script>
+	        function deleteConfirm(){
+	           const isDelete=confirm("이 글을 삭제 하겠습니까?");
+	           if(isDelete){
+	              location.href="classCafeDelete?num=${dto.num}";
+	           }
+	        }
+        </script>
+    </c:if>
       <div class="d-flex justify-content-between mb-4">
       <%-- 만일 이전글(더 옛날글)의 글번호가 0 가 아니라면(이전글이 존재 한다면) --%>
 	      <c:if test="${dto.prevNum ne 0}">
-	         <a class="link-dark" href="detail?num=${dto.prevNum}&condition=${condition}&keyword=${encodedK}">이전글</a>
+	         <a class="link-dark" href="classCafeDetail?num=${dto.prevNum}&condition=${condition}&keyword=${encodedK}">이전글</a>
 	      </c:if>
 	      
 	      <%-- 만일 다음글(더 최신글)의 글번호가 0 가 아니라면(다음글이 존재 한다면) --%>
 	      <c:if test="${dto.nextNum ne 0}">
-	         <a class="link-dark" href="detail?num=${dto.nextNum}&condition=${condition}&keyword=${encodedK}">다음글</a>
+	         <a class="link-dark" href="classCafeDetail?num=${dto.nextNum}&condition=${condition}&keyword=${encodedK}">다음글</a>
 	      </c:if>
       </div>
-      
-      
       
       <!-- 댓글 목록 -->
       <div class="comments">
