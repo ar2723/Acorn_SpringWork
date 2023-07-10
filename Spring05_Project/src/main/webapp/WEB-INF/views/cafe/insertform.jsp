@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/cafe/insertform.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 <style>
 	textarea{
 		width: 768px;
@@ -13,20 +15,25 @@
 	}
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<h3>새글 작성 폼입니다.</h3>
-		<form action="insert" method="post">
-			<div>
-				<label for="title">제목</label>
-				<input type="text" name="title" id="title"/>
-			</div>
-			<div>
-				<label for="content">내용</label>
-				<textarea name="content" id="content" rows="10"></textarea>
-			</div>
-			<button type="submit" onclick="submitContents(this)">저장</button>
-		</form>
+		<div class="d-flex flex-column align-items-center mt-4">
+			<h3>새 글 작성하기</h3>
+			<form style="width:770px" action="insert" method="post">
+				<div class="mt-2">
+					<label class="form-label d-inline-block" for="title">제목</label>
+					<input class="form-control" type="text" name="title" id="title"/>
+				</div>
+				<div class="mt-2">
+					<label class="form-label" for="content">내용</label>
+					<textarea name="content" id="content" rows="10"></textarea>
+				</div>
+				<div class="d-flex justify-content-center mt-2">
+					<button class="btn btn-primary" type="submit" onclick="submitContents(this)">저장하기</button>
+				</div>
+			</form>
+		</div>
 	</div>
 
 	<!-- SmartEditor 에서 필요한 javascript 로딩  -->
@@ -84,6 +91,7 @@
 			var nFontSize = 24;
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
-	</script>		
+	</script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>	
 </body>
 </html>

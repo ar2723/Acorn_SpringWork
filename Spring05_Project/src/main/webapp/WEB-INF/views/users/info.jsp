@@ -18,7 +18,7 @@
 	}
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
 		<h1>회원 정보</h1>
@@ -68,5 +68,6 @@
 			}
 		}
 	</script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

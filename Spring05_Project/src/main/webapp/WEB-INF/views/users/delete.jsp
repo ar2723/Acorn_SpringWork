@@ -8,12 +8,9 @@
 <title>/views/users/delete.jsp</title>
 </head>
 <body>
-	<div class="container">
-		<h1>알림</h1>
-		<p>
-			<strong>${requestScope.id }</strong> 님 탈퇴 처리 되었습니다.
-			<a href="${pageContext.request.contextPath}/">인덱스로 가기</a>
-		</p>
-	</div>
+	<script>
+		alert("${requestScope.id}님 탈퇴 처리 되었습니다.");
+		location.href="${pageContext.request.contextPath}/";
+	</script>
 </body>
 </html>

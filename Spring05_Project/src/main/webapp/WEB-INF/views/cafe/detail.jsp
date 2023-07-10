@@ -15,50 +15,33 @@
 <body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
    <div class="container">
-      <!-- 로그인된 아이디와 글의 작성자가 같으면 수정, 삭제 링크를 제공한다. -->
-      <c:if test="${sessionScope.id eq dto.writer}">
-      	<div class="d-flex justify-content-end">
+   		<div class="wrapper mt-3" style="margin-bottom: 50px;">
+	   		<div style="border-bottom: 1px solid rgb(204, 204, 204); backGround-color:rgb(248, 248, 248); height:45px;" 
+	   			class="d-flex justify-content-between p-2">
+	   			<div><strong><small>작성자 : ${dto.writer}</small></strong></div>
+	   			<div><strong><small>${dto.regdate}</small></strong></div>
+				<div><strong><small>조회 : ${dto.viewCount}</small></strong></div>
+	   		</div>
+	   		<h2 style="color:brown" class="mt-4 ps-2">${dto.title}</h2>
+	   		<div style="height: auto; min-height: 200px" class="ps-3 mt-4">${dto.content}</div>
+   		</div>
+	
+	<c:if test="${sessionScope.id eq dto.writer}">
+      	<div style="border-bottom: 1px solid rgb(204, 204, 204)" class="d-flex justify-content-end mb-3 pb-1">
 	       <a class="link-dark me-2" href="updateform?num=${dto.num }">수정하기</a>
 	       <a class="link-dark me-2" href="javascript:" onclick="deleteConfirm()">삭제하기</a>
         </div>
-         <script>
-            function deleteConfirm(){
-               const isDelete=confirm("이 글을 삭제 하겠습니까?");
-               if(isDelete){
-                  location.href="delete?num=${dto.num}";
-               }
-            }
-         </script>
-      </c:if>
-      <table class="table table-bordered">
-         <tr>
-            <th>글번호</th>
-            <td>${dto.num}</td>
-         </tr>
-         <tr>
-            <th>작성자</th>
-            <td>${dto.writer}</td>
-         </tr>
-         <tr>
-            <th>제목</th>
-            <td>${dto.title}</td>
-         </tr>
-         <tr>
-            <th>조회</th>
-            <td>${dto.viewCount}</td>   
-         </tr>
-         <tr>
-            <th>등록일</th>
-            <td>${dto.regdate}</td>
-         </tr>
-         <tr>
-            <td colspan="2">
-               <div>${dto.content}</div>
-            </td>
-         </tr>   
-      </table>
-
-      <div class="d-flex justify-content-between mb-4">
+        <script>
+           function deleteConfirm(){
+              const isDelete=confirm("이 글을 삭제 하겠습니까?");
+              if(isDelete){
+                 location.href="delete?num=${dto.num}";
+              }
+           }
+        </script>
+    </c:if>
+	
+      <div class="d-flex justify-content-between mb-4 mt-2">
       <%-- 만일 이전글(더 옛날글)의 글번호가 0 가 아니라면(이전글이 존재 한다면) --%>
 	      <c:if test="${dto.prevNum ne 0}">
 	         <a class="link-dark" href="detail?num=${dto.prevNum}&condition=${condition}&keyword=${encodedK}">이전글</a>
@@ -69,11 +52,17 @@
 	         <a class="link-dark" href="detail?num=${dto.nextNum}&condition=${condition}&keyword=${encodedK}">다음글</a>
 	      </c:if>
       </div>
-      
-      
-      
+      <!-- 원글에 댓글을 작성할 폼 -->
+      <form class="comment-form insert-form" action="comment_insert" method="post">
+         <!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
+         <input type="hidden" name="ref_group" value="${dto.num}"/>
+         <!-- 원글의 작성자가 댓글의 대상자가 된다. -->
+         <input type="hidden" name="target_id" value="${dto.writer}"/>
+         <textarea style="border-color:rgb(204, 204, 204)" class="form-control" name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
+         <button class="btn btn-primary" type="submit">등록</button>
+      </form>
       <!-- 댓글 목록 -->
-      <div class="comments">
+      <div class="comments mt-2">
          <ul>
             <c:forEach var="tmp" items="${commentList}">
                <c:choose>
@@ -146,7 +135,6 @@
                               <textarea name="content"></textarea>
                               <button type="submit">등록</button>
                            </form>
-                           
                         <!-- 로그인 된 id가 작성자와 일치할 때에만 댓글 수정 폼이 생성됨 -->
                         <c:if test="${tmp.writer eq id}">
                            <form id="updateForm${tmp.num}" class="comment-form update-form" action="comment_update" method="post">
@@ -167,15 +155,6 @@
             <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
         </svg>
       </div>
-      <!-- 원글에 댓글을 작성할 폼 -->
-      <form class="comment-form insert-form" action="comment_insert" method="post">
-         <!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
-         <input type="hidden" name="ref_group" value="${dto.num}"/>
-         <!-- 원글의 작성자가 댓글의 대상자가 된다. -->
-         <input type="hidden" name="target_id" value="${dto.writer}"/>
-         <textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
-         <button type="submit">등록</button>
-      </form>
    </div>
    <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
    <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>

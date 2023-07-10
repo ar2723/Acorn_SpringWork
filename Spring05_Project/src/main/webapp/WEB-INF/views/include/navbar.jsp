@@ -16,7 +16,7 @@
 			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
 			<img src="${pageContext.request.contextPath}/resources/images/pig.png"
 			width="35" height="35" class="d-inline-block">
-			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업 게시판
+			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업게시판
 			</a></li>
 			<img src="${pageContext.request.contextPath}/resources/images/blueSA.png"
 			width="35" height="35" class="d-inline-block">

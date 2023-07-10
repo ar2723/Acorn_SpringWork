@@ -49,7 +49,7 @@
    <select id="getData" parameterType="int" resultType="classCafeDto">
       SELECT result1.*
       FROM
-         (SELECT num,writer,title,content,viewCount,TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,
+         (SELECT num, writer, className, title, content, viewCount, TO_CHAR(regdate, 'YY.MM.DD HH24:MI') AS regdate,
             LAG(num, 1, 0) OVER (ORDER BY num DESC) nextNum,
                LEAD(num, 1, 0) OVER (ORDER BY num DESC) prevNum
           FROM board_cafe_class) result1

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script>
-		alert("${id} 님 글을 수정 했습니다.");
+		alert("${id} 님의 글을 수정 했습니다.");
 		location.href="${pageContext.request.contextPath}/cafe/detail?num=${param.num}";
 	</script>
 </body>

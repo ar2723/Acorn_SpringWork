@@ -21,39 +21,16 @@
 	}
 </style>
 </head>
-<body>
-	<header>
-		<div class="boardList">
-			<li><a href="${pageContext.request.contextPath}/cafe/list">자유게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/cafe/classCafeList">직업 게시판</a></li>
-			<li><a href="${pageContext.request.contextPath}/gallery/list">코디 저장소</a></li>
-		</div>
-		<div class="login">
-			<c:choose>
-				<c:when test="${empty sessionScope.id}">
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/loginform">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/signup_form">회원가입</a></li>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-						<li><a href="${pageContext.request.contextPath}/users/info">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/users/logout">로그아웃</a></li>
-					</p>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</header>
+<body class="d-flex flex-column min-vh-100">
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<h3>회원 가입 수정 폼 입니다.</h3>
-		
-		<a id="profileLink" href="javascript:">
+		<h2 class="text-center mt-4">가입 정보 수정하기</h2>
+		<a style="margin-top: 3%" class="d-flex justify-content-center" id="profileLink" href="javascript:">
 			<c:choose>
 				<c:when test="${ empty dto.profile }">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-					  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-					  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+					<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+						  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 					</svg>
 				</c:when>
 				<c:otherwise>
@@ -61,21 +38,27 @@
 				</c:otherwise>
 			</c:choose>
 		</a>
-		<form action="${pageContext.request.contextPath}/users/update" method="post">		
-			<input type="hidden" name="profile" 
-				value="${ empty dto.profile ? 'empty' : dto.profile }"/>		
-			<div>
-				<label for="id">아이디</label>
-				<input type="text" id="id" value="${dto.id }" disabled/>
-			</div>
-			<div>
-				<label for="email">이메일</label>
-				<input type="text" id="email" name="email" value="${dto.email }"/>
-			</div>
-			<button type="submit">수정확인</button>
-			<button type="reset">취소</button>
-		</form>	
-		
+		<div class="d-flex justify-content-center mt-2 mb-2">
+			<h8 class="text-center">프로필 사진을 변경하려면 아이콘 또는 사진을 클릭하세요</h8>
+		</div>
+		<div class="d-flex flex-column align-items-center">
+			<form style="width:500px" class="form" action="${pageContext.request.contextPath}/users/update" method="post">		
+				<input type="hidden" name="profile" 
+					value="${ empty dto.profile ? 'empty' : dto.profile }"/>		
+				<div class="mt-3">
+					<label class="form-label" for="id">아이디</label>
+					<input class="form-control" type="text" id="id" value="${dto.id }" disabled/>
+				</div>
+				<div class="mt-3">
+					<label class="form-label" for="email">이메일</label>
+					<input class="form-control" type="text" id="email" name="email" value="${dto.email }"/>
+				</div>
+				<div class="mt-3 d-flex justify-content-center">
+					<button class="btn btn-primary me-2" type="submit">수정확인</button>
+					<button class="btn btn-secondary ms-2" type="reset">취소</button>
+				</div>
+			</form>	
+		</div>
 		<form id="imageForm" action="${pageContext.request.contextPath}/users/profile_upload" method="post" enctype="multipart/form-data">
 			프로필 사진
 			<input type="file" id="image" name="image" accept=".jpg, .png, .gif"/>
@@ -83,6 +66,7 @@
 		</form>
 					
 	</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	<!-- gura_util.js 로딩 -->
 	<script src="${pageContext.request.contextPath }/resources/js/gura_util.js"></script>
 	<script>
@@ -116,5 +100,6 @@
 		});		
 		
 	</script>
+	
 </body>
 </html>

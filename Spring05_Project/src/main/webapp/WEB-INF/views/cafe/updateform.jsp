@@ -8,15 +8,21 @@
 <title>/views/cafe/updateform.jsp</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
+<style>
+	textarea{
+		width: 768px;
+		height: 300px;
+	}
+</style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<form class="form" action="update" method="post">
-			<input type="hidden" name="num" value="${dto.num }" />
+		<form style="width:770px" class="form" action="update" method="post">
+			<input type="hidden" name="num" value="${dto.num}" />
 			<div>
 				<label class="form-label" for="writer">작성자</label>
-				<input class="form-control" type="text" id="writer" value="${dto.writer }" disabled/>
+				<input class="form-control" type="text" id="writer" value="${dto.writer}" disabled/>
 			</div>
 			<div>
 				<label class="form-label" for="title">제목</label>
@@ -24,7 +30,7 @@
 			</div>
 			<div>
 				<label class="form-label" for="content">내용</label>
-				<textarea class="form-control" name="content" id="content">${dto.content }</textarea>
+				<textarea name="content" id="content">${dto.content }</textarea>
 			</div>
 			<button class="btn btn-primary" type="submit" onclick="submitContents(this);">수정확인</button>
 			<button class="btn btn-secondary" type="reset">취소</button>
@@ -84,5 +90,6 @@
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
 	</script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>

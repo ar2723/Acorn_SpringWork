@@ -10,38 +10,40 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/header.css" />
 <style>
 	textarea{
-		width: 600px;
-		height: 500px;
+		width: 768px;
+		height: 300px;
 	}
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<jsp:include page="/WEB-INF/views/include/navbar.jsp"></jsp:include>
 	<div class="container">
-		<form action="classCafeInsert" method="post">
-			<div class="d-flex">
-				<div class="me-4">
-					<label class="form-lable" for="title">제목</label>
-					<input class="form-control" type="text" name="title" id="title"/>
-				</div>
-				<div class="ms-4">
-					<label class="form-lable" for="className">직업</label>
-					<select class="form-select" id="className" name="className">
+		<div class="d-flex flex-column align-items-center">
+			<form style="width:770px" action="classCafeInsert" method="post">
+				<div class="d-flex mt-4">
+					<div class="col-8 me-1">
+						<input class="form-control" type="text" name="title" id="title" placeholder="제목"/>
+					</div>
+					<div class="col-4">
+						<select class="form-select" id="className" name="className">
 	                        <option value="">직업선택</option>
 	                        <option value="warrior">전사</option>
 	                        <option value="archer">궁수</option>
 	                        <option value="thief">도적</option>
 	                        <option value="mage">마법사</option>
 	                        <option value="pirate">해적</option>
-	                </select>
+		                </select>
+					</div>
 				</div>
-			</div>
-			<div>
-				<label class="form-lable" for="content">내용</label>
-				<textarea class="form-control" name="content" id="content" rows="10"></textarea>
-			</div>
-			<button class="btn btn-primary" type="submit" onclick="submitContents(this)">저장</button>
-		</form>
+				<div class="mt-4">
+					<label class="form-label" for="content">내용</label>
+					<textarea name="content" id="content" rows="10"></textarea>
+				</div>
+				<div class="d-flex justify-content-center">
+					<button class="btn btn-primary" type="submit" onclick="submitContents(this)">저장하기</button>
+				</div>
+			</form>
+		</div>
 	</div>
 
 	<!-- SmartEditor 에서 필요한 javascript 로딩  -->
@@ -100,5 +102,6 @@
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
 	</script>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>
 </html>
