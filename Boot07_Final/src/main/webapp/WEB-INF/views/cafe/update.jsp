@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/users/logout.jsp</title>
+<title>/views/cafe/update.jsp</title>
 </head>
 <body>
 	<script>
-		alert("로그아웃 되었습니다.");
-		location.href="${pageContext.request.contextPath}/";
+		alert("${id} 님 글을 수정 했습니다.");
+		location.href="${pageContext.request.contextPath}/cafe/detail?num=${param.num}";
 	</script>
 </body>
 </html>

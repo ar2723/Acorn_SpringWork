@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/users/updateform.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 <style>
 	/* 이미지 업로드 폼을 숨긴다 */
 	#imageForm{
@@ -17,12 +18,17 @@
 		border: 1px solid #cecece;
 		border-radius: 50%;
 	}
+	.container{
+		width: 768px;
+	}
 </style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/include/navbar.jsp">
+		<jsp:param value="update" name="current"/>
+	</jsp:include>
 	<div class="container">
-		<h3>회원 가입 수정 폼 입니다.</h3>
-		
+		<h3>가입 정보 수정</h3>
 		<a id="profileLink" href="javascript:">
 			<c:choose>
 				<c:when test="${ empty dto.profile }">
@@ -40,15 +46,17 @@
 			<input type="hidden" name="profile" 
 				value="${ empty dto.profile ? 'empty' : dto.profile }"/>		
 			<div>
-				<label for="id">아이디</label>
-				<input type="text" id="id" value="${dto.id }" disabled/>
+				<label class="form-label" for="id">아이디</label>
+				<input class="form-control" type="text" id="id" value="${dto.id }" disabled/>
 			</div>
 			<div>
-				<label for="email">이메일</label>
-				<input type="text" id="email" name="email" value="${dto.email }"/>
+				<label class="form-label" for="email">이메일</label>
+				<input class="form-control" type="text" id="email" name="email" value="${dto.email }"/>
 			</div>
-			<button type="submit">수정확인</button>
-			<button type="reset">취소</button>
+			<div class="mt-2">
+				<button class="btn btn-primary" type="submit">수정확인</button>
+				<button class="btn btn-secondary" type="reset">취소</button>
+			</div>
 		</form>	
 		
 		<form id="imageForm" action="${pageContext.request.contextPath}/users/profile_upload" method="post" enctype="multipart/form-data">

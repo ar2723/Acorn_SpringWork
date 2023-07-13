@@ -24,12 +24,12 @@
 			<ul class="navbar-nav me-auto">
 									<!-- EL로 Jsp에서 넘겨받은 파라미터값을 바로 받아서 활용할 수 있다. -->
 				<li class="nav-item"><a id="cafe_list"
-					class="nav-link ${param.current eq 'cafe_list' ? 'active' : ''}"
-					href="${pageContext.request.contextPath}/cafe/list.jsp">게시판</a>
+					class="nav-link ${param.current eq 'cafe' ? 'active' : ''}"
+					href="${pageContext.request.contextPath}/cafe/list">게시판</a>
 				</li>
 				<li class="nav-item"><a id="file_list"
 					class="nav-link ${param.current eq 'file_list' ? 'active' : ''}"
-					href="${pageContext.request.contextPath}/file/list.jsp">자료실</a></li>
+					href="${pageContext.request.contextPath}/file/list">자료실</a></li>
 			</ul>
 			<div class="navbar-nav">
 				<c:choose>

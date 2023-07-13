@@ -27,12 +27,12 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		//메소드의 인자로 전달되는 InterceptorRegistry 객체를 이용해서 Interceptor를 등록하면 된다.
 		//메소드 안에서 리턴 값을 자신의 데이터 타입(this)으로 참조값으로 설정하면, 메소드 호출 시에 연쇄적으로 사용할 수 있도록 해준다.
+		//인자의 패턴이 String... patterns 이렇게 되어 있다면 동적으로 인자를 여러 개(콤마로 구분)를 전달할 수 있다.
 		registry.addInterceptor(loginInter)
-				.addPathPatterns("/users/*")
-				.excludePathPatterns("/users/loginform")
-				.excludePathPatterns("/users/login")
-				.excludePathPatterns("/users/signup_form")
-				.excludePathPatterns("/users/signup");
+				.addPathPatterns("/users/*", "/cafe/*")
+				.excludePathPatterns("/users/loginform", "/users/login", 
+						"/users/signup_form", "/users/signup", "/cafe/list", 
+						"/cafe/detail", "/cafe/ajax_comment_list");
 	}
 	
 	@Override

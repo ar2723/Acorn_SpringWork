@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/users/logout.jsp</title>
+<title>/views/cafe/insert.jsp</title>
 </head>
 <body>
 	<script>
-		alert("로그아웃 되었습니다.");
-		location.href="${pageContext.request.contextPath}/";
+		alert("새글이 추가 되었습니다.");
+		location.href="${pageContext.request.contextPath}/cafe/list";
 	</script>
 </body>
 </html>
