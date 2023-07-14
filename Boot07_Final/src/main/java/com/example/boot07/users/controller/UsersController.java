@@ -1,15 +1,24 @@
 package com.example.boot07.users.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +34,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	
+	@Value("${file.location}")
+	private String fileLocation;
 	
 	@GetMapping("/users/signup_form")
 	public String signupForm() {
@@ -107,6 +119,19 @@ public class UsersController {
 		return service.saveProfileImage(request, image);
 	};
 	
+	@GetMapping(
+		value = "/users/images/{imageName}",
+		produces = {MediaType.IMAGE_GIF_VALUE,  MediaType.IMAGE_PNG_VALUE, 
+				MediaType.IMAGE_JPEG_VALUE,}
+	)
+	@ResponseBody
+	public byte[] profileImage(@PathVariable("imageName") String imageName) throws IOException {
+		String absolutePath = fileLocation + File.separator + imageName;
+		// 파일에서 읽어들일 InputStream
+		InputStream is = new FileInputStream(absolutePath);
+		// 이미지 데이터 (byte)를 읽어서 배열에 담아서 클라이언트에게 응답한다.
+		return IOUtils.toByteArray(is);
+	}	
 	//개인정보 수정 요청 처리
 	@PostMapping("/users/update")
 	public String update(UsersDto dto, HttpSession session) {

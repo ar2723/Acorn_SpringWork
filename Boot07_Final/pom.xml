@@ -27,11 +27,6 @@
 			<version>2.3.1</version>
 		</dependency>
 		<dependency>
-           	<groupId>org.springframework.security</groupId>
-           	<artifactId>spring-security-web</artifactId>
-           	<version>4.0.0.RELEASE</version>
-      	</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -58,6 +53,12 @@
 			<version>2.3.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Spring Security 관련 라이브러리 (비밀번호 인코딩 클래스를 위해 추가) -->
+		<dependency>
+           	<groupId>org.springframework.security</groupId>
+           	<artifactId>spring-security-web</artifactId>
+           	<version>4.0.0.RELEASE</version>
+      	</dependency>
 		<!-- jsp 페이지 사용과 taglib 를 사용하기 위해 -->
 	    <dependency>
 	       <groupId>org.apache.tomcat.embed</groupId>
@@ -68,6 +69,12 @@
 	       <groupId>javax.servlet</groupId>
 	       <artifactId>jstl</artifactId>
 	    </dependency>
+	    <!-- IOUtils 클래스를 사용하기 위한 라이브러리 (파일, 이미지 업로드 처리 보조)-->
+        <dependency>
+	        <groupId>commons-io</groupId>
+	        <artifactId>commons-io</artifactId>
+	        <version>2.4</version>
+      	</dependency>
 	</dependencies>
 
 	<build>

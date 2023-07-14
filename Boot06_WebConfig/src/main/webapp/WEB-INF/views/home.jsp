@@ -23,12 +23,16 @@
 		<%-- cpath == src/main/resources/static --%>
 		<img src="${pageContext.request.contextPath}/images/bottle.png" />
 		<img src="${pageContext.request.contextPath}/images/kim1.png" />
+		<%-- 컨트롤러에 이미지 데이터 요청하기 --%>
+		<img src="${pageContext.request.contextPath}/aaa/kim1.png" />
+		<img src="${pageContext.request.contextPath}/aaa/kim2.png" />
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/html/hello.html">html 페이지 가기</a></li>
 			<%-- static 폴더에는 jsp 페이지를 위치시킬 수 없다. jsp 파일은 컴파일링이 필요한 동적 자원이기 때문이다 --%>
 			<li><a href="${pageContext.request.contextPath}/jsp/hello.jsp">jsp 페이지<a></li>
 			<li><a href="${pageContext.request.contextPath}/test.jsp">jsp 페이지</a></li>
 			<li><a href="cafe/insertform">카페 글쓰기</a></li>
+			<li><a href="${pageContext.request.contextPath}/file/uploadform">파일 업로드 테스트</a></li>
 		</ul>
 		<h3>공지사항</h3>
 		<ul>
