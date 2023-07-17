@@ -1,6 +1,10 @@
 package com.example.boot07.file.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
@@ -9,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.boot07.exception.NotDeleteException;
 import com.example.boot07.file.dao.FileDao;
@@ -24,6 +30,7 @@ public class FileServiceImpl implements FileService{
 	@Autowired
 	private FileDao dao;
 	
+	//다운로드 or 업로드할 파일이 저장된 위치 얻어내기
 	@Value("${file.location}")
 	private String fileLocation;
 	
@@ -149,9 +156,36 @@ public class FileServiceImpl implements FileService{
 	
 	//이 메소드는 파일 다운로드 요청 처리시에 활용되기 위해 만들어둔 것이다.
 	@Override
-	public FileDto getFileData(int num) {
-		//다운로드 할 파일의 정보를 얻어와서
-		return dao.getData(num);
+	public ResponseEntity<InputStreamResource> getFileData(int num) throws UnsupportedEncodingException, FileNotFoundException {
+		//다운로드 해줄 파일의 정보를 DB에서 읽어온다.
+		FileDto dto = dao.getData(num);
+		String orgFileName = dto.getOrgFileName();
+		long fileSize = dto.getFileSize();
+		String saveFileName = dto.getSaveFileName();
+	      
+		//다운로드 시켜줄 원본 파일명
+		String encodedName = URLEncoder.encode(orgFileName, "utf-8");
+			
+		encodedName = encodedName.replaceAll("\\+"," ");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
+		// 파일의 이름 정보(웹브라우저가 해당 정보를 이용해서 파일을 만들어 준다)
+		headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename="+encodedName);
+		// 파일의 크기 정보도 담아준다.
+		headers.setContentLength(fileSize);
+			  
+		// 읽어들일 파일의 경로 구성
+		String filePath=fileLocation + File.separator + saveFileName;
+		// 파일에서 읽어들일 스트림 객체
+		InputStream is=new FileInputStream(filePath);
+		// InputStreamResource 객체의 참조값 얻어내기
+		InputStreamResource isr = new InputStreamResource(is);
+		// ResponseEntity 객체의 참조값 얻어내기
+		ResponseEntity<InputStreamResource> resEn = ResponseEntity.ok()
+				.headers(headers)
+				.header("Content-Transfer-Encoding", "binary")
+    		  	.body(isr);
+		return resEn;
 	}
 
 	@Override

@@ -44,6 +44,8 @@ public class FileController {
 		//저장할 파일명 구성하기
 		String saveFileName=UUID.randomUUID().toString();
 		// 파일을 저장할 폴더까지의 실제경로
+		// File.separator는 윈도우에서는 '\' 로 해석되어 입력되고, 리눅스에서는 '/' 로 해석되어 입력된다.
+		// 따라서 일괄적으로 '\' 으로 작성해서 넣어버리면 리눅스에서는 오류가 발생하게 된다.
 		String filePath=fileLocation+File.separator+saveFileName;
 		try {
 			//원하는 경로에 파일 저장하기

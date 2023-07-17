@@ -30,6 +30,9 @@
 				<li class="nav-item"><a id="file_list"
 					class="nav-link ${param.current eq 'file_list' ? 'active' : ''}"
 					href="${pageContext.request.contextPath}/file/list">자료실</a></li>
+				<li class="nav-item"><a id="gallery_list"
+					class="nav-link ${param.current eq 'gallery_list' ? 'active' : ''}"
+					href="${pageContext.request.contextPath}/gallery/list">갤러리</a></li>
 			</ul>
 			<div class="navbar-nav">
 				<c:choose>
